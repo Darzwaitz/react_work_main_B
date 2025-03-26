@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import "./App.css";
 
 export default function App() {
-  const [quote, setQuote] = useState();
+  const [quote, setQuote] = useState("");
   const [count, setCount] = useState(0);
 
   async function getQuote() {
     const res = await fetch("https://api.adviceslip.com/advice");
     const data = await res.json();
-    // console.log(data.slip.advice);
-    // return data;
+
     setQuote(data.slip.advice);
     setCount((c) => c + 1);
   }
@@ -22,12 +21,27 @@ export default function App() {
     <div>
       <h1>quotePage</h1>
       <button onClick={getQuote}>Get quote</button>
-      <p style={{ height: "16px" }}>{quote}</p>
+      <Message count={count} quote={quote} />
+    </div>
+  );
+}
 
+interface MessageProps {
+  count: number;
+  quote: string;
+}
+function Message(props: MessageProps): ReactElement {
+  return (
+    <div>
+      <p style={{ height: "16px" }}>{props.quote}</p>
       <p style={{ height: "16px" }}>
-        {count === 0
+        {props.count === 0
           ? "No quotes yet"
-          : `${count === 1 ? `${count} quote` : `${count} quotes`}`}
+          : `${
+              props.count === 1
+                ? `${props.count} quote`
+                : `${props.count} quotes`
+            }`}
       </p>
     </div>
   );
