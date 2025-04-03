@@ -30,6 +30,9 @@ interface MessageProps {
   count: number;
   quote: string;
 }
+
+// alt syntax - JSX from React
+// function Message(props: MessageProps): JSX.Element {
 function Message(props: MessageProps): ReactElement {
   return (
     <div>
