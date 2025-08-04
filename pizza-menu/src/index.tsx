@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDom from "react-dom/client";
+// import pizzaData from "./data";
 
 function App() {
+  // console.log(pizzaData);
   return <h1>Homepage</h1>;
 }
 
